@@ -10,9 +10,12 @@ initially I would like these basic functions. People who want a tailored collect
 application. This project is of interest to me as I listen to music all the time, so It would be interesting to
 understand how this functionality is built into my day to day applications.
 
-- As a user, I would like to add a song to a playlist
+## User Stories
+
+- As a user, I would like to create a custom playlist with a custom name
 - As a user, I would like to input a custom song with a name, artist and genre
-- As a user, I want to be able to play the songs I have in my playlist in a consecutive order
-- As a user, I would delete songs from a playlist
-- As a user, I would like to name this playlist
+- As a user, I want to know how long my playlist is
+- As a user, I would like to view my playlists
+- As a user, I would like to view all th songs in my playlist
+- As a user, I would like to input a song and have it automatically pick a playlist based on genre
 
