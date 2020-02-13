@@ -51,9 +51,6 @@ public class LibraryTest {
         p.addSong(s1);
         p.addSong(s2);
         p2.addSong(s3);
-        assertEquals("Hip-Hop!: a Rap type playlist\n" +
-                "Monster by Kanye West: Rap\n" +
-                "Space Cowboy by Kasey Musgraves: Country\n" +
-                "Bonfire by Childish Gambino: Rap",p.toStringPlaylist());
+        assertEquals("JordanW's Playlist",l.viewPlaylists());
     }
 }

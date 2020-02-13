@@ -57,8 +57,6 @@ public class Library {
                     + " with " + p.getTotalSongs()
                     + " running at " + p.getTotalRuntime();
         }
-        return username + "'s Playlists\n" +  str;
+        return username + "'s Playlist" + str;
     }
-
-
 }

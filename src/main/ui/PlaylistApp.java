@@ -26,11 +26,12 @@ public class PlaylistApp {
         String username;
         String command;
 
+        initialMenu();
+        username = input.next();
+        library = new Library("");
+        System.out.println("\nHello " + username + "!");
+
         while (keepGoing) {
-            initialMenu();
-            username = input.next();
-            library = new Library("");
-            System.out.println("\nHello " + username + "!");
             displayMenu();
             command = input.next();
             command = command.toLowerCase();
@@ -112,12 +113,6 @@ public class PlaylistApp {
         System.out.println("\nWhat playlist would you like to add it too");
         playlist = input.next();
         song = new Song(name,artist,genre,runtime);
-
-        for (Playlist p : library) {
-            if (p.getPlaylistName() == playlist) {
-                p.addSong(song);
-            }
-        }
     }
 
     // EFFECTS; Returns runtime of playlist selected by user
@@ -127,11 +122,6 @@ public class PlaylistApp {
         System.out.println("\nWhat playlist would you like to check?");
         name = input.next();
 
-        for (Playlist p : library) {
-            if (p.getPlaylistName().equals(name)) {
-                runtime = p.getTotalRuntime();
-            }
-        }
         return runtime;
     }
 
@@ -142,10 +132,6 @@ public class PlaylistApp {
 
         System.out.println("\nWhat playlist would you like to view?");
         name = input.next();
-        for (Playlist p : library) {
-            if (p.getPlaylistName() == name) {
-                p.toStringPlaylist();
-            }
-        }
     }
+
 }
