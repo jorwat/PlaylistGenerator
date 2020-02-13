@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class PlaylistApp {
     private Library library;
     private Scanner input;
+    private String username;
 
     // EFFECTS: runs the playlist application
     public PlaylistApp() {
@@ -23,7 +24,6 @@ public class PlaylistApp {
     private void runPlaylist() {
         boolean keepGoing = true;
         input = new Scanner(System.in);
-        String username;
         String command;
 
         initialMenu();
@@ -72,7 +72,7 @@ public class PlaylistApp {
         } else if (command.equals("s")) {
             viewSongs();
         } else if (command.equals("l")) {
-            library.viewPlaylists();
+            viewLibraryContent();
         } else {
             System.out.println("Selection is not valid...");
         }
@@ -113,16 +113,17 @@ public class PlaylistApp {
         System.out.println("\nWhat playlist would you like to add it too");
         playlist = input.next();
         song = new Song(name,artist,genre,runtime);
+
+        library.matchAndAdd(playlist, song);
     }
 
     // EFFECTS; Returns runtime of playlist selected by user
-    private int playlistLength() {
+    private void playlistLength() {
         String name;
         int runtime = 0;
         System.out.println("\nWhat playlist would you like to check?");
         name = input.next();
-
-        return runtime;
+        System.out.println(library.matchAndFindRuntime(name));
     }
 
     // REQUIRES: Playlist must exist
@@ -132,5 +133,12 @@ public class PlaylistApp {
 
         System.out.println("\nWhat playlist would you like to view?");
         name = input.next();
+        System.out.println(library.matchAndViewSongs(name));
+    }
+
+    // REQUIRES: library must have a playlist
+    // EFFECTS: displays playlists within the library
+    private void viewLibraryContent() {
+        System.out.println(library.viewPlaylists(username));
     }
 }

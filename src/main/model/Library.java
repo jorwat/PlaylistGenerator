@@ -50,13 +50,51 @@ public class Library {
     }
 
     // EFFECTS; returns a string of contents of the playlist
-    public String viewPlaylists() {
+    public String viewPlaylists(String username) {
         for (Playlist p : library) {
             str += "\n" + p.getPlaylistName() + ": a "
                     + p.getPlaylistGenre()
                     + " with " + p.getTotalSongs()
-                    + " running at " + p.getTotalRuntime();
+                    + "song running at " + p.getTotalRuntime();
         }
         return username + "'s Playlist" + str;
+    }
+
+    // REQUIRES: playlist must exist within the library
+    // MODIFIES: this, and playlist
+    // EFFECTS: matches string to playlist and adds song to playlist
+    public void matchAndAdd(String playlist, Song song) {
+        for (Playlist p : library) {
+            if (p.getPlaylistName().equals(playlist)) {
+                p.addSong(song);
+            }
+        }
+    }
+
+    // REQUIRES: must have playlists in the library
+    // EFFECTS: matches string with playlist name and returns total runtime
+    public int matchAndFindRuntime(String playlist) {
+        int runtime = 0;
+
+        for (Playlist p : library) {
+            if (p.getPlaylistName().equals(playlist)) {
+                runtime = p.getTotalRuntime();
+            }
+        }
+        return runtime;
+    }
+
+    // REQUIRES: playlist must exist within the library, playlist must have songs on it
+    // EFFECTS: matches the name of the playlist with string,
+    //          and displays songs in the playlist
+    public String matchAndViewSongs(String playlist) {
+        String str = null;
+
+        for (Playlist p : library) {
+            if (p.getPlaylistName() == playlist) {
+                str = p.toStringPlaylist();
+            }
+        }
+        return str;
     }
 }
