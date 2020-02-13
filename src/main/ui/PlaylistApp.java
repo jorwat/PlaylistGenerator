@@ -133,5 +133,4 @@ public class PlaylistApp {
         System.out.println("\nWhat playlist would you like to view?");
         name = input.next();
     }
-
 }
