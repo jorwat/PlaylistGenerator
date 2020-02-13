@@ -1,5 +1,7 @@
 package model;
 
+import ui.PlaylistApp;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +11,8 @@ public class Library {
     private List<Playlist> library;
     private int size;
     private String username;
+    private String str = "";
 
-    // REQUIRES: username that's not null
     // EFFECTS: creates a library for initialization
     public Library(String username) {
         library = new ArrayList<>();
@@ -45,6 +47,17 @@ public class Library {
     // EFFECTS: returns size of library
     public int getSize() {
         return size;
+    }
+
+    // EFFECTS; returns a string of contents of the playlist
+    public String viewPlaylists() {
+        for (Playlist p : library) {
+            str += "\n" + p.getPlaylistName() + ": a "
+                    + p.getPlaylistGenre()
+                    + " with " + p.getTotalSongs()
+                    + " running at " + p.getTotalRuntime();
+        }
+        return username + "'s Playlists\n" +  str;
     }
 
 

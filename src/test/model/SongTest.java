@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SongTest extends LibraryTest{
 
     @Test
-    void testConstuctorSong(){
+    void testConstructorSong(){
         assertEquals("Monster",s1.getTitle());
         assertEquals("Kanye West",s1.getArtist());
         assertEquals("Rap",s1.getGenre());

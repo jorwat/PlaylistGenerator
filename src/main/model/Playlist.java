@@ -13,14 +13,13 @@ public class Playlist {
     private String playlistGenre;
     private String str = "";
 
-    // REQUIRES: name and playlist name cannot be null
     // EFFECTS: constructs an empty playlist with a user defined name
-    public Playlist(String name, String playlistGenre) {
+    public Playlist(String name, String genre) {
         playlist = new ArrayList<>();
-        playlistName = name;
+        playlistGenre = genre;
         playlistRuntime = 0;
         totalSongs = 0;
-        this.playlistGenre = playlistGenre;
+        playlistName = name;
     }
 
     // REQUIRES: the song cannot have empty fields
