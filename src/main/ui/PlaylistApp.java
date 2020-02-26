@@ -102,7 +102,7 @@ public class PlaylistApp {
         int runtime;
         String playlist;
 
-        System.out.println("\nWhat is the song called");
+        System.out.println("\nWhat is the song called?");
         name = input.next();
         System.out.println("\nWho is the artist?");
         artist = input.next();
@@ -110,7 +110,7 @@ public class PlaylistApp {
         genre = input.next();
         System.out.println("\nHow long is it in seconds?");
         runtime = input.nextInt();
-        System.out.println("\nWhat playlist would you like to add it too");
+        System.out.println("\nWhat playlist would you like to add it to?");
         playlist = input.next();
         song = new Song(name,artist,genre,runtime);
 

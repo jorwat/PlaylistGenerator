@@ -16,6 +16,5 @@ understand how this functionality is built into my day to day applications.
 - As a user, I would like to input a custom song with a name, artist and genre
 - As a user, I want to know how long my playlist is
 - As a user, I would like to view my playlists
-- As a user, I would like to view all th songs in my playlist
-- As a user, I would like to input a song and have it automatically pick a playlist based on genre
-
+- As a user, I would like to view all the songs in my playlist***
+- 

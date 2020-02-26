@@ -54,8 +54,8 @@ public class Library {
         for (Playlist p : library) {
             str += "\n" + p.getPlaylistName() + ": a "
                     + p.getPlaylistGenre()
-                    + " with " + p.getTotalSongs()
-                    + "song running at " + p.getTotalRuntime();
+                    + " playlist with " + p.getTotalSongs()
+                    + " song/songs running at " + p.getTotalRuntime() + " seconds!";
         }
         return username + "'s Playlist" + str;
     }
