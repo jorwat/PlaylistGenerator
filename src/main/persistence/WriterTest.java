@@ -23,7 +23,7 @@ class WriterTest {
     @BeforeEach
     void runBefore() throws FileNotFoundException, UnsupportedEncodingException {
         testWriter = new Writer(new File(TEST_FILE));
-        l1 = new Library("JordanW");
+        l1 = new Library("Jordan");
         Playlist p1 = new Playlist("Hood Beats", "Rap");
         Playlist p2 = new Playlist("Country Thunder", "Country");
         l1.addPlaylist(p1);
@@ -44,12 +44,14 @@ class WriterTest {
         try {
             List<Playlist> playlists = Reader.readPlaylists(new File(TEST_FILE));
             Playlist rap = playlists.get(0);
+            assertEquals("Jordan",rap.getTag());
             assertEquals("Hood Beats",rap.getPlaylistName());
             assertEquals("Rap", rap.getPlaylistGenre());
             assertEquals(2, rap.getTotalSongs());
             assertEquals(500, rap.getTotalRuntime());
 
             Playlist country = playlists.get(1);
+            assertEquals("Jordan", country.getTag());
             assertEquals("Country Thunder",country.getPlaylistName());
             assertEquals("Country", country.getPlaylistGenre());
             assertEquals(1, country.getTotalSongs());

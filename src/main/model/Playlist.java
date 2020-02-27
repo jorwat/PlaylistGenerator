@@ -31,7 +31,6 @@ public class Playlist {
         this.playlistGenre = genre;
         this.totalSongs = songs;
         this.playlistRuntime = runtime;
-
     }
 
     // REQUIRES: the song cannot have empty fields
@@ -85,6 +84,12 @@ public class Playlist {
             str += "\n" + s.getTitle() + " by " + s.getArtist() + ": " + s.getGenre();
         }
         return  getPlaylistName() + "!: a " + getPlaylistGenre() + " type playlist" + str;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: changes playlist tag
+    public void changeTag(String s) {
+        tag = s;
     }
 
 }

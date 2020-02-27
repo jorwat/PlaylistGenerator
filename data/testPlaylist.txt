@@ -1,2 +1,2 @@
-JordanW,Hood Beats,Rap,2,500
-JordanW,Country Thunder,Country,1,250
+Jordan,Hood Beats,Rap,2,500
+Jordan,Country Thunder,Country,1,250

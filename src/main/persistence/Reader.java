@@ -58,7 +58,4 @@ public class Reader {
         return new Playlist(username,playlistName,playlistGenre,totalSongs,totalRuntime);
     }
 
-
-
-
 }

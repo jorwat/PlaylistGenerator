@@ -16,7 +16,7 @@ understand how this functionality is built into my day to day applications.
 - As a user, I would like to input a custom song with a name, artist and genre
 - As a user, I want to know how long my playlist is
 - As a user, I would like to view my playlists
-- As a user, I would like to create a custom library that saves on my machine automatically; 
+- As a user, I would like to create a custom library that saves on my machine; 
 that way all my playlists are saved, with song amounts and length.
-- As a user, I would the option to have the application open up my library automatically without having
+- As a user, I would like the application to open up to my library automatically without having
 to load it manually

@@ -8,10 +8,8 @@ import persistence.Reader;
 import persistence.Writer;
 
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Scanner;
 
@@ -87,7 +85,7 @@ public class PlaylistApp {
     private void init() {
         initialMenu();
         username = input.next();
-        library = new Library("");
+        library = new Library(username);
     }
 
     // EFFECTS: displays menu of options to the user
@@ -96,8 +94,8 @@ public class PlaylistApp {
         System.out.println("\tc -> create playlist");
         System.out.println("\ta -> add song");
         System.out.println("\tv -> find length of a playlist");
-        System.out.println("\ts -> view contents of playlists");
-        System.out.println("\tx -> save contents of your library");
+        System.out.println("\tx -> view contents of playlist");
+        System.out.println("\ts -> save contents of your library");
         System.out.println("\tl -> view contents of library");
         System.out.println("\tq -> quit");
     }
@@ -116,9 +114,9 @@ public class PlaylistApp {
             addSong();
         } else if (command.equals("v")) {
             playlistLength();
-        } else if (command.equals("s")) {
-            viewSongs();
         } else if (command.equals("x")) {
+            viewSongs();
+        } else if (command.equals("s")) {
             saveLibrary();
         } else if (command.equals("l")) {
             viewLibraryContent();
@@ -188,5 +186,20 @@ public class PlaylistApp {
     // EFFECTS: displays playlists within the library
     private void viewLibraryContent() {
         System.out.println(library.viewPlaylists(username));
+    }
+
+    // MODIFIES: this
+    // EFFECTS: deletes PLAYLIST_FILE
+    private void deleteLibrary(File file) {
+        try {
+            Files.deleteIfExists(file.toPath());
+            System.out.println("Library deleted at " + PLAYLIST_FILE + "!");
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to delete as file doesnt exist at" + PLAYLIST_FILE);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("Unable to delete as file doesnt exist at" + PLAYLIST_FILE);
+        }
     }
 }
