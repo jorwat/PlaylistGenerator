@@ -51,6 +51,14 @@ public class Library implements Saveable {
         return size;
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds username tag to all playlists created by user
+    public void addTag() {
+        for (Playlist p : library) {
+            p.tag = username;
+        }
+    }
+
     // EFFECTS; returns a string of contents of the playlist
     public String viewPlaylists(String username) {
         for (Playlist p : library) {
@@ -93,7 +101,7 @@ public class Library implements Saveable {
         String str = null;
 
         for (Playlist p : library) {
-            if (p.getPlaylistName() == playlist) {
+            if (p.getPlaylistName().equals(playlist)) {
                 str = p.toStringPlaylist();
             }
         }
@@ -103,6 +111,8 @@ public class Library implements Saveable {
     // EFFECTS: saves playlist data to save file
     @Override
     public void save(PrintWriter printWriter) {
+        addTag();
+
         for (Playlist p : library) {
             printWriter.print(username);
             printWriter.print(Reader.DELIMITER);

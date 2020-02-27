@@ -9,7 +9,7 @@ public class Playlist {
     private List<Song> playlist;
     private int playlistRuntime;
     private int totalSongs;
-    private String username;
+    public String tag;
     private String playlistName;
     private String playlistGenre;
     private String str = "";
@@ -26,7 +26,7 @@ public class Playlist {
 
     public Playlist(String username, String name, String genre, int songs, int runtime) {
         playlist = new ArrayList<>();
-        this.username = username;
+        this.tag = username;
         this.playlistName = name;
         this.playlistGenre = genre;
         this.totalSongs = songs;
@@ -69,9 +69,9 @@ public class Playlist {
         return totalSongs;
     }
 
-    // EFFECTS: returns username
-    public String getUsername() {
-        return username;
+    // EFFECTS: returns username tag
+    public String getTag() {
+        return tag;
     }
 
     // EFFECTS: returns playlist name
@@ -84,7 +84,7 @@ public class Playlist {
         for (Song s : playlist) {
             str += "\n" + s.getTitle() + " by " + s.getArtist() + ": " + s.getGenre();
         }
-        return  getPlaylistName() + "!: a " + getPlaylistGenre() + " type playlist by " + getUsername() + str;
+        return  getPlaylistName() + "!: a " + getPlaylistGenre() + " type playlist" + str;
     }
 
 }

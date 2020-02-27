@@ -5,16 +5,19 @@ import model.Library;
 import model.Playlist;
 import model.Song;
 import persistence.Reader;
+import persistence.Writer;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Scanner;
 
 // Playlist application
 public class PlaylistApp {
-    private static final String PLAYLIST_FILE = "./data/accounts.txt";
+    private static final String PLAYLIST_FILE = "./data/library.txt";
     private Library library;
     private Scanner input;
     private String username;
@@ -31,6 +34,7 @@ public class PlaylistApp {
         input = new Scanner(System.in);
         String command;
 
+        loadLibrary();
         System.out.println("\nHello " + username + "!");
 
         while (keepGoing) {
@@ -53,14 +57,28 @@ public class PlaylistApp {
         try {
             List<Playlist> playlists = Reader.readPlaylists(new File(PLAYLIST_FILE));
             Playlist loadPlaylist = playlists.get(0);
-            library = new Library(loadPlaylist.getUsername());
-            username = loadPlaylist.getUsername();
+            library = new Library(loadPlaylist.getTag());
+            username = loadPlaylist.getTag();
             for (Playlist p : playlists) {
                 library.addPlaylist(p);
             }
 
         } catch (IOException e) {
             init();
+        }
+    }
+
+    // EFFECTS: saves state of library to PLAYLIST_FILE
+    private void saveLibrary() {
+        try {
+            Writer writer = new Writer(new File(PLAYLIST_FILE));
+            writer.write(library);
+            writer.close();
+            System.out.println("Library Saved to " + PLAYLIST_FILE + "!");
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to save library to file" + PLAYLIST_FILE);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
     }
 
@@ -79,6 +97,7 @@ public class PlaylistApp {
         System.out.println("\ta -> add song");
         System.out.println("\tv -> find length of a playlist");
         System.out.println("\ts -> view contents of playlists");
+        System.out.println("\tx -> save contents of your library");
         System.out.println("\tl -> view contents of library");
         System.out.println("\tq -> quit");
     }
@@ -99,6 +118,8 @@ public class PlaylistApp {
             playlistLength();
         } else if (command.equals("s")) {
             viewSongs();
+        } else if (command.equals("x")) {
+            saveLibrary();
         } else if (command.equals("l")) {
             viewLibraryContent();
         } else {

@@ -51,6 +51,11 @@ public class LibraryTest {
         p.addSong(s1);
         p.addSong(s2);
         p2.addSong(s3);
-        assertEquals("JordanW's Library",l.viewPlaylists("JordanW"));
+        l.addPlaylist(p);
+        l.addPlaylist(p2);
+        assertEquals("JordanW's Library\n" +
+                "Hip-Hop: a Rap playlist with 2 song/songs running at 450 seconds!\n" +
+                "Yeehaw: a Country playlist with 1 song/songs running at 300 seconds!",l.viewPlaylists("JordanW"));
     }
+
 }
