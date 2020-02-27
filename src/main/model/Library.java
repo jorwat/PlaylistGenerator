@@ -100,13 +100,12 @@ public class Library implements Saveable {
         return str;
     }
 
+    // EFFECTS: saves playlist data to save file
     @Override
     public void save(PrintWriter printWriter) {
-        printWriter.print(username);
-        printWriter.print(Reader.DELIMITER);
-
         for (Playlist p : library) {
-            printWriter.print(Reader.NAME_LIMITER);
+            printWriter.print(username);
+            printWriter.print(Reader.DELIMITER);
             printWriter.print(p.getPlaylistName());
             printWriter.print(Reader.DELIMITER);
             printWriter.print(p.getPlaylistGenre());
@@ -114,6 +113,7 @@ public class Library implements Saveable {
             printWriter.print(p.getTotalSongs());
             printWriter.print(Reader.DELIMITER);
             printWriter.print(p.getTotalRuntime());
+            printWriter.print(Reader.PLAYLIST_DELIMITER);
         }
     }
 

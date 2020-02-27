@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-// A reader that can read library data from a file
+// A reader that can read library data from a file/files
 // NOTE: template of reader is based on the teller app, but refactored for my implementation.
 public class Reader {
     public static final String DELIMITER = ",";
-    public static final String NAME_LIMITER = "\n";
+    public static final String PLAYLIST_DELIMITER = "\n";
 
     // EFFECTS: returns a list of playlists parsed from file; throws
     // IOException if an exception is raised when opening / reading the file
@@ -34,29 +34,31 @@ public class Reader {
         List<Playlist> playlists = new ArrayList<>();
 
         for (String line : fileContent) {
-            ArrayList<String> lineData = splitString(line);
-            playlists.add(parsePlaylist(lineData));
+            ArrayList<String> lineComponents = splitString(line);
+            playlists.add(parsePlaylist(lineComponents));
         }
 
         return playlists;
     }
 
-    // EFFECTS: returns a list of strings obtained by splitting line with the DELIMITER
+    // EFFECTS: returns a list of strings obtained by splitting playlist data with the DELIMITER
     private static ArrayList<String> splitString(String line) {
         String[] splits = line.split(DELIMITER);
         return new ArrayList<>(Arrays.asList(splits));
     }
 
-    // REQUIRES: components have size 5 where element 0 is the username of the playlist,
-    // element 1 represents the playlist name, element 2 represents the genre of the playlist,
-    // element 3 represents the total songs in the playlist, and element 4 represents the total runtime
-    // of the playlist
+    // REQUIRES: components have size 4 where element 0 is the name of the playlist, element 1 is the genre,
+    // element 2 is the total songs, and element 3 is the run time
     private static Playlist parsePlaylist(List<String> components) {
+        String username = components.get(0);
         String playlistName = components.get(1);
         String playlistGenre = components.get(2);
         int totalSongs = Integer.parseInt(components.get(3));
         int totalRuntime = Integer.parseInt(components.get(4));
-        return new Playlist(playlistName,playlistGenre);
+        return new Playlist(username,playlistName,playlistGenre,totalSongs,totalRuntime);
     }
+
+
+
 
 }

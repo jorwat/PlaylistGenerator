@@ -3,23 +3,35 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-// Represents a playlist with a name, defined length, and total of songs
+// Represents a playlist with a name, genre, defined length, total songs, and a username to tag who made it
 public class Playlist {
 
     private List<Song> playlist;
     private int playlistRuntime;
     private int totalSongs;
+    private String username;
     private String playlistName;
     private String playlistGenre;
     private String str = "";
 
-    // EFFECTS: constructs an empty playlist with a user defined name
+    // EFFECTS: default constructs an empty playlist with a user defined name
     public Playlist(String name, String genre) {
         playlist = new ArrayList<>();
-        playlistGenre = genre;
-        playlistRuntime = 0;
-        totalSongs = 0;
-        playlistName = name;
+        this.playlistName = name;
+        this.playlistGenre = genre;
+        this.playlistRuntime = 0;
+        this.totalSongs = 0;
+
+    }
+
+    public Playlist(String username, String name, String genre, int songs, int runtime) {
+        playlist = new ArrayList<>();
+        this.username = username;
+        this.playlistName = name;
+        this.playlistGenre = genre;
+        this.totalSongs = songs;
+        this.playlistRuntime = runtime;
+
     }
 
     // REQUIRES: the song cannot have empty fields
@@ -57,6 +69,11 @@ public class Playlist {
         return totalSongs;
     }
 
+    // EFFECTS: returns username
+    public String getUsername() {
+        return username;
+    }
+
     // EFFECTS: returns playlist name
     public String getPlaylistName() {
         return playlistName;
@@ -67,6 +84,7 @@ public class Playlist {
         for (Song s : playlist) {
             str += "\n" + s.getTitle() + " by " + s.getArtist() + ": " + s.getGenre();
         }
-        return  getPlaylistName() + "!: a " + getPlaylistGenre() + " type playlist" + str;
+        return  getPlaylistName() + "!: a " + getPlaylistGenre() + " type playlist by " + getUsername() + str;
     }
+
 }

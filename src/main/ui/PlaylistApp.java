@@ -4,13 +4,17 @@ package ui;
 import model.Library;
 import model.Playlist;
 import model.Song;
+import persistence.Reader;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 // Playlist application
 public class PlaylistApp {
-    private static final String LIBRARY_FILE = "./data/accounts.txt";
+    private static final String PLAYLIST_FILE = "./data/accounts.txt";
     private Library library;
     private Scanner input;
     private String username;
@@ -27,7 +31,6 @@ public class PlaylistApp {
         input = new Scanner(System.in);
         String command;
 
-        init();
         System.out.println("\nHello " + username + "!");
 
         while (keepGoing) {
@@ -44,10 +47,21 @@ public class PlaylistApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: loads library from LIBRARY_FILE, if file exists
+    // EFFECTS: loads library from PLAYLIST_FILE if file exists
     // otherwise initializes a library with user selected name.
-    private void loadLibrary(){
+    private void loadLibrary() {
+        try {
+            List<Playlist> playlists = Reader.readPlaylists(new File(PLAYLIST_FILE));
+            Playlist loadPlaylist = playlists.get(0);
+            library = new Library(loadPlaylist.getUsername());
+            username = loadPlaylist.getUsername();
+            for (Playlist p : playlists) {
+                library.addPlaylist(p);
+            }
 
+        } catch (IOException e) {
+            init();
+        }
     }
 
     // MODIFIES: this
@@ -134,7 +148,6 @@ public class PlaylistApp {
     // EFFECTS; Returns runtime of playlist selected by user
     private void playlistLength() {
         String name;
-        int runtime = 0;
         System.out.println("\nWhat playlist would you like to check?");
         name = input.next();
         System.out.println(library.matchAndFindRuntime(name));

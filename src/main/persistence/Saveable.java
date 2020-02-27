@@ -8,6 +8,6 @@ import java.io.PrintWriter;
 public interface Saveable {
 
     // MODIFIES: printWriter
-    // EFFECTS: writers the saved state to printWriter
+    // EFFECTS: writes the saved state to printWriter
     void save(PrintWriter printWriter);
 }
