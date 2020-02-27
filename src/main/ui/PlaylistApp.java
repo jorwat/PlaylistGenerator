@@ -97,6 +97,7 @@ public class PlaylistApp {
         System.out.println("\tx -> view contents of playlist");
         System.out.println("\ts -> save contents of your library");
         System.out.println("\tl -> view contents of library");
+        System.out.println("\td -> delete library");
         System.out.println("\tq -> quit");
     }
 
@@ -120,6 +121,8 @@ public class PlaylistApp {
             saveLibrary();
         } else if (command.equals("l")) {
             viewLibraryContent();
+        } else if (command.equals("d")) {
+            deleteLibrary(new File(PLAYLIST_FILE));
         } else {
             System.out.println("Selection is not valid...");
         }
@@ -194,8 +197,6 @@ public class PlaylistApp {
         try {
             Files.deleteIfExists(file.toPath());
             System.out.println("Library deleted at " + PLAYLIST_FILE + "!");
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to delete as file doesnt exist at" + PLAYLIST_FILE);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {
