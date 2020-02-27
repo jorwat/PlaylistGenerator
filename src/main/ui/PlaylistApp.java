@@ -191,16 +191,18 @@ public class PlaylistApp {
         System.out.println(library.viewPlaylists(username));
     }
 
+    // REQUIRES: user must close the program to see change reflected
     // MODIFIES: this
     // EFFECTS: deletes PLAYLIST_FILE
     private void deleteLibrary(File file) {
         try {
             Files.deleteIfExists(file.toPath());
-            System.out.println("Library deleted at " + PLAYLIST_FILE + "! Please exit program!");
+            System.out.println("Library deleted at " + PLAYLIST_FILE + "!"
+                    + " New Library will be made once application is" + "closed!");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            System.out.println("Unable to delete as file doesnt exist at" + PLAYLIST_FILE);
+            System.out.println("Unable to delete as file doesn't exist at" + PLAYLIST_FILE);
         }
     }
 }
