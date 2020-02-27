@@ -1,12 +1,14 @@
 package model;
 
-import ui.PlaylistApp;
+import persistence.Saveable;
+import persistence.Reader;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents a Library of Playlists with a Username
-public class Library {
+public class Library implements Saveable {
 
     private List<Playlist> library;
     private int size;
@@ -57,7 +59,7 @@ public class Library {
                     + " playlist with " + p.getTotalSongs()
                     + " song/songs running at " + p.getTotalRuntime() + " seconds!";
         }
-        return username + "'s Playlist" + str;
+        return username + "'s Library" + str;
     }
 
     // REQUIRES: playlist must exist within the library
@@ -97,4 +99,22 @@ public class Library {
         }
         return str;
     }
+
+    @Override
+    public void save(PrintWriter printWriter) {
+        printWriter.print(username);
+        printWriter.print(Reader.DELIMITER);
+
+        for (Playlist p : library) {
+            printWriter.print(Reader.NAME_LIMITER);
+            printWriter.print(p.getPlaylistName());
+            printWriter.print(Reader.DELIMITER);
+            printWriter.print(p.getPlaylistGenre());
+            printWriter.print(Reader.DELIMITER);
+            printWriter.print(p.getTotalSongs());
+            printWriter.print(Reader.DELIMITER);
+            printWriter.print(p.getTotalRuntime());
+        }
+    }
+
 }

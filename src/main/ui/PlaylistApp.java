@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 // Playlist application
 public class PlaylistApp {
+    private static final String LIBRARY_FILE = "./data/accounts.txt";
     private Library library;
     private Scanner input;
     private String username;
@@ -26,9 +27,7 @@ public class PlaylistApp {
         input = new Scanner(System.in);
         String command;
 
-        initialMenu();
-        username = input.next();
-        library = new Library("");
+        init();
         System.out.println("\nHello " + username + "!");
 
         while (keepGoing) {
@@ -42,6 +41,21 @@ public class PlaylistApp {
                 processCommand(command);
             }
         }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads library from LIBRARY_FILE, if file exists
+    // otherwise initializes a library with user selected name.
+    private void loadLibrary(){
+
+    }
+
+    // MODIFIES: this
+    // EFFECTS: initializes library
+    private void init() {
+        initialMenu();
+        username = input.next();
+        library = new Library("");
     }
 
     // EFFECTS: displays menu of options to the user

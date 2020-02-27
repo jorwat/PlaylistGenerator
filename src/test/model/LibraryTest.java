@@ -51,6 +51,6 @@ public class LibraryTest {
         p.addSong(s1);
         p.addSong(s2);
         p2.addSong(s3);
-        assertEquals("JordanW's Playlist",l.viewPlaylists("JordanW"));
+        assertEquals("JordanW's Library",l.viewPlaylists("JordanW"));
     }
 }
