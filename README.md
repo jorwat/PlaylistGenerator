@@ -20,3 +20,4 @@ understand how this functionality is built into my day to day applications.
 that way all my playlists are saved, with song amounts and length.
 - As a user, I would like the application to open up to my library automatically without having
 to load it manually
+- As a user, I would like the option to delete my library and start over with a blank slate

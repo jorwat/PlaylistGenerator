@@ -196,7 +196,7 @@ public class PlaylistApp {
     private void deleteLibrary(File file) {
         try {
             Files.deleteIfExists(file.toPath());
-            System.out.println("Library deleted at " + PLAYLIST_FILE + "!");
+            System.out.println("Library deleted at " + PLAYLIST_FILE + "! Please exit program!");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {
