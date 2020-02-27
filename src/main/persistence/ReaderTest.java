@@ -36,6 +36,29 @@ class ReaderTest {
     }
 
     @Test
+    void testParseAccountsFile2() {
+        try {
+            List<Playlist> playlists = Reader.readPlaylists(new File("./data/testPlaylist2.txt"));
+            Playlist p1 = playlists.get(0);
+            assertEquals("Nick",p1.getTag());
+            assertEquals("OoogaBooga", p1.getPlaylistName());
+            assertEquals("Alternative", p1.getPlaylistGenre());
+            assertEquals(4, p1.getTotalSongs());
+            assertEquals(400, p1.getTotalRuntime());
+
+            Playlist p2 = playlists.get(1);
+            assertEquals("Nick",p2.getTag());
+            assertEquals("FamilyTime",p2.getPlaylistName());
+            assertEquals("Children",p2.getPlaylistGenre());
+            assertEquals(6, p2.getTotalSongs());
+            assertEquals(595,p2.getTotalRuntime());
+
+        } catch (IOException e) {
+            fail("IOException should not have been thrown");
+        }
+    }
+
+    @Test
     void testIOException() {
         try {
             Reader.readPlaylists(new File("./data/testPlaylist.txt"));
