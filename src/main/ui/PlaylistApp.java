@@ -8,19 +8,23 @@ import persistence.Reader;
 import persistence.Writer;
 
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.Scanner;
 
 // Playlist application
-public class PlaylistApp {
+public class PlaylistApp extends JFrame {
+    public static final int WIDTH = 1280;
+    public static final int HEIGHT = 720;
     private static final String PLAYLIST_FILE = "./data/library.txt";
     private Library library;
     private Scanner input;
     private String username;
 
-    // EFFECTS: runs the playlist application
+    // EFFECTS: runs the playlist application. Starts
     public PlaylistApp() {
         runPlaylist();
     }
