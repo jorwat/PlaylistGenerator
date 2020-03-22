@@ -1,17 +1,16 @@
 package ui;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
@@ -30,7 +29,7 @@ public class PlaylistApp extends Application {
     public static final int WIDTH = 1280;
     public static final int HEIGHT = 720;
     private static final String PLAYLIST_FILE = "./data/library.txt";
-    private static final Media media = new Media("./data/Click.mp3");
+    private static final String SOUND_FILE = "/data/song.mp3";
 
     private Stage window;
     private Library library;
@@ -109,29 +108,43 @@ public class PlaylistApp extends Application {
         launch(args);
     }
 
-
     // MODIFIES: this
     // EFFECTS: creates a window for the application to operate in and handles scene switching
+    // CODE FROM STACKOVERFLOW
+    // https://stackoverflow.com/questions/44274098/javafx-play-a-sound-when-ever-something-is-clicked
     @Override
     public void start(Stage primaryStage) {
         window = primaryStage;
+        Media media = new Media("file:/c:/Users/Jordan/IdeaProjects/project_v3y2b/data/song.mp3");
+        MediaPlayer player = new MediaPlayer(media);
+        MediaView soundPlayer = new MediaView(player);
 
-        window.setScene(initialScene());
+        Scene initial = initialScene(soundPlayer);
+        KeyCodeCombination ctrlM = new KeyCodeCombination(KeyCode.M,KeyCodeCombination.CONTROL_DOWN);
+        initial.setOnKeyPressed(event -> {
+            if (ctrlM.match(event)) {
+                player.play();
+            }
+        });
+
+        window.setScene(initial);
         window.setTitle("MyPersonalPlaylist");
         window.show();
+
     }
 
 
     // MODIFIES: this
     // EFFECTS: returns a scene object that appears at the very beginning. Library checking will occur here.
-    private Scene initialScene() {
+    @SuppressWarnings("checkstyle:MethodLength")
+    private Scene initialScene(MediaView player) {
         VBox s = new VBox();
         Button b = new Button("Start");
         s.setAlignment(Pos.CENTER);
 
         try {
             loadLibrary();
-            s.getChildren().addAll(b);
+            s.getChildren().addAll(b,player);
             b.setOnAction(e -> window.setScene(welcomeScreenScene()));
         } catch (IOException ex) {
             s.getChildren().addAll(b);
@@ -360,21 +373,5 @@ public class PlaylistApp extends Application {
         }
         return new Scene(s, WIDTH, HEIGHT);
     }
-
-    // MODIFIES: this
-    // EFFECTS: event handler for a clicking sound within the program
-    // CODE FROM STACKOVERFLOW
-    // https://stackoverflow.com/questions/44274098/javafx-play-a-sound-when-ever-something-is-clicked
-
-    public void clickNoise() {
-        MediaPlayer player = new MediaPlayer(media);
-
-
-    }
-
-   // @Override
- //   public void handle(ActionEvent event) {
-        ///if (KeyEvent == KeyCode.SPACE) {
-   // }
-    //}
+    
 }
