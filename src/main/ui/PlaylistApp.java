@@ -24,20 +24,17 @@ import persistence.Writer;
 import java.io.*;
 import java.nio.file.Files;
 import java.util.List;
-import java.util.Random;
 
 // Playlist application
 public class PlaylistApp extends Application {
     public static final int WIDTH = 1280;
     public static final int HEIGHT = 720;
     private static final String PLAYLIST_FILE = "./data/library.txt";
+    private static final Media media = new Media("./data/Click.mp3");
 
     private Stage window;
     private Library library;
     private String username;
-    private int red;
-    private int blue;
-    private int green;
 
     // MODIFIES: this
     // EFFECTS: loads library from PLAYLIST_FILE if file exists
@@ -60,6 +57,8 @@ public class PlaylistApp extends Application {
     // EFFECTS: saves state of library to PLAYLIST_FILE
     private void saveLibrary() throws FileNotFoundException, UnsupportedEncodingException {
         try {
+            String name = username;
+            library.setUsername(name);
             Writer writer = new Writer(new File(PLAYLIST_FILE));
             writer.write(library);
             writer.close();
@@ -132,6 +131,7 @@ public class PlaylistApp extends Application {
 
         try {
             loadLibrary();
+            s.getChildren().addAll(b);
             b.setOnAction(e -> window.setScene(welcomeScreenScene()));
         } catch (IOException ex) {
             s.getChildren().addAll(b);
@@ -325,7 +325,7 @@ public class PlaylistApp extends Application {
     }
 
     // MODIFIES: this
-    // EFFECTS: returns a scene object of the view library scene with actions
+    // EFFECTS: returns a scene object of the view library scene
     private Scene viewLibraryScene() {
         VBox s = new VBox();
         Text viewLibrary = new Text(library.viewPlaylists(username));
@@ -340,7 +340,7 @@ public class PlaylistApp extends Application {
     }
 
     // MODIFIES: this
-    // EFFECTS: returns a scene object of the delete library scene with actions
+    // EFFECTS: returns a scene object of the delete library scene
     private Scene deleteLibraryScene() {
         VBox s = new VBox();
         Button b = new Button("Return to Main Menu");
@@ -361,17 +361,20 @@ public class PlaylistApp extends Application {
         return new Scene(s, WIDTH, HEIGHT);
     }
 
-   /* // MODIFIES: this
+    // MODIFIES: this
     // EFFECTS: event handler for a clicking sound within the program
     // CODE FROM STACKOVERFLOW
     // https://stackoverflow.com/questions/44274098/javafx-play-a-sound-when-ever-something-is-clicked
 
-    @Override
-    public void handle(ActionEvent event) {
-        if (KeyEvent == KeyCode.SPACE) {
-            Random rand = new Random();
-        }
+    public void clickNoise() {
+        MediaPlayer player = new MediaPlayer(media);
+
+
     }
 
-    */
+   // @Override
+ //   public void handle(ActionEvent event) {
+        ///if (KeyEvent == KeyCode.SPACE) {
+   // }
+    //}
 }

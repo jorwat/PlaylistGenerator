@@ -98,6 +98,12 @@ public class Library implements Saveable {
         return str;
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets user name before save file
+    public void setUsername(String name) {
+        username = name;
+    }
+
     // EFFECTS: saves playlist data to save file
     @Override
     public void save(PrintWriter printWriter) {
