@@ -59,7 +59,7 @@ public class Library implements Saveable {
                     + " playlist with " + p.getTotalSongs()
                     + " song/songs running at " + p.getTotalRuntime() + " seconds!";
         }
-        return username + "'s Library" + str;
+        return str;
     }
 
     // REQUIRES: playlist must exist within the library
