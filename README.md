@@ -24,7 +24,8 @@ to load it manually
 ## Instructions for Grader
 
 - Before hitting Start, you will want to trigger the audio component, hit ctrl-m on the keyboard. 
-It should trigger a song.
+It should trigger a song. **It will pause at the main menu for now as I am planning to have a 
+song manager in the future**.
 - From there, hit start and enter your name and hit the button
 - From there, enter your library
 - You can generate the first required event. Create a playlist by hitting the create a 

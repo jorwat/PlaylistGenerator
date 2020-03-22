@@ -29,7 +29,7 @@ public class PlaylistApp extends Application {
     public static final int WIDTH = 1280;
     public static final int HEIGHT = 720;
     private static final String PLAYLIST_FILE = "./data/library.txt";
-    private static final String SOUND_FILE = "/data/song.mp3";
+    private static final String SOUND_FILE = "./data/song.mp3";
 
     private Stage window;
     private Library library;
@@ -115,7 +115,7 @@ public class PlaylistApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         window = primaryStage;
-        Media media = new Media("file:/c:/Users/Jordan/IdeaProjects/project_v3y2b/data/song.mp3");
+        Media media = new Media(new File(SOUND_FILE).toURI().toString());
         MediaPlayer player = new MediaPlayer(media);
         MediaView soundPlayer = new MediaView(player);
 
