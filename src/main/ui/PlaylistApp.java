@@ -123,6 +123,7 @@ public class PlaylistApp extends Application {
         KeyCodeCombination ctrlM = new KeyCodeCombination(KeyCode.M,KeyCodeCombination.CONTROL_DOWN);
         initial.setOnKeyPressed(event -> {
             if (ctrlM.match(event)) {
+                System.out.println(System.getProperty("user.dir"));
                 player.play();
             }
         });
@@ -133,10 +134,8 @@ public class PlaylistApp extends Application {
 
     }
 
-
     // MODIFIES: this
     // EFFECTS: returns a scene object that appears at the very beginning. Library checking will occur here.
-    @SuppressWarnings("checkstyle:MethodLength")
     private Scene initialScene(MediaView player) {
         VBox s = new VBox();
         Button b = new Button("Start");
@@ -373,5 +372,5 @@ public class PlaylistApp extends Application {
         }
         return new Scene(s, WIDTH, HEIGHT);
     }
-    
+
 }
