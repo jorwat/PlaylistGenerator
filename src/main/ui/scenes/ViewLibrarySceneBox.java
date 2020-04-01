@@ -29,7 +29,7 @@ public class ViewLibrarySceneBox extends SceneBox {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets functionality of buttons
+    // EFFECTS: sets functionality of scene nodes.
     private void setNodes() {
         this.getChildren().addAll(viewLibrary, menu);
         menu.setOnAction(e -> window.setScene(new Scene((

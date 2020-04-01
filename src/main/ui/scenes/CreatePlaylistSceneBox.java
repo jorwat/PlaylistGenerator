@@ -40,7 +40,7 @@ public class CreatePlaylistSceneBox extends SceneBox {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets functionality of buttons
+    // EFFECTS: sets functionality of scene nodes.
     private void setNodes() {
         this.getChildren().addAll(q1, nameField, q2, genreField, submit, menu);
         submit.setOnAction(e -> createPlaylist(nameField.getText(), genreField.getText()));

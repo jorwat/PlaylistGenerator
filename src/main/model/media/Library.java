@@ -66,7 +66,8 @@ public class Library implements Saveable {
     }
 
     // MODIFIES: this, and playlist
-    // EFFECTS: matches string to playlist and adds song to playlist
+    // EFFECTS: matches string to playlist and adds song to playlist.
+    // If no playlist is found NoPlaylistException is thrown.
     public void matchAndAdd(String playlist, Song song) throws NoPlaylistException {
         for (Playlist p : library) {
             if (p.getPlaylistName().equals(playlist)) {
@@ -77,7 +78,8 @@ public class Library implements Saveable {
         }
     }
 
-    // EFFECTS: matches string with playlist name and returns total runtime
+    // EFFECTS: matches string with playlist name and returns total runtime.
+    //          If no playlist is found NoPlaylistException is thrown.
     public int matchAndFindRuntime(String playlist) throws NoPlaylistException {
         int runtime = 0;
 
@@ -92,7 +94,8 @@ public class Library implements Saveable {
     }
 
     // EFFECTS: matches the name of the playlist with string,
-    //          and displays songs in the playlist
+    //          and displays songs in the playlist. If no playlist is found
+    //          NoPlaylistException is thrown
     public String matchAndViewSongs(String playlist) throws NoPlaylistException {
         for (Playlist p : library) {
             if (p.getPlaylistName().equals(playlist)) {

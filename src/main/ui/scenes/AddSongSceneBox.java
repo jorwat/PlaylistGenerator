@@ -53,7 +53,7 @@ public class AddSongSceneBox extends SceneBox {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets functionality of buttons
+    // EFFECTS: sets functionality of scene nodes.
     private void setNodes() {
         this.getChildren().addAll(q1, nameField, q2, artistField, q3, genreField, q4, runtimeField,
                 q5, playlistField, submit, menu);

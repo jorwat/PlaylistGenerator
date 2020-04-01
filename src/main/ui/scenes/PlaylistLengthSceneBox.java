@@ -36,7 +36,7 @@ public class PlaylistLengthSceneBox extends SceneBox {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets functionality of buttons
+    // EFFECTS: sets functionality of scene nodes.
     private void setNodes() {
         this.getChildren().addAll(q1, field, submit, menu);
         submit.setOnAction(e -> {

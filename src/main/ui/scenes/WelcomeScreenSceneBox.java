@@ -33,7 +33,7 @@ public class WelcomeScreenSceneBox extends VBox {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets functionality of buttons
+    // EFFECTS: sets functionality of scene nodes.
     private void setNodes() {
         message.setTextAlignment(TextAlignment.CENTER);
         message.setStyle("-fx-font: 28 arial;");
@@ -43,7 +43,4 @@ public class WelcomeScreenSceneBox extends VBox {
         button.setOnAction(e -> window.setScene(new Scene((new MainMenuSceneBox(
                 window,library,username)),WIDTH,HEIGHT)));
     }
-
-
-
 }

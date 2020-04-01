@@ -33,7 +33,7 @@ public class DeleteLibrarySceneBox extends SceneBox {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets functionality of buttons
+    // EFFECTS: sets functionality of scene nodes.
     private void setNodes() {
         try {
             deleteLibrary(new File(PLAYLIST_FILE));

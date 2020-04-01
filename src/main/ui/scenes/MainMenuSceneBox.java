@@ -39,7 +39,7 @@ public class MainMenuSceneBox extends SceneBox {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets functionality of buttons
+    // EFFECTS: sets functionality of scene nodes.
     private void setNodes() {
         this.getChildren().addAll(createPlaylist, addSong, findPlaylistLength, viewSongs,
                 saveLibrary, viewLibrary, deleteLibrary, quit);
