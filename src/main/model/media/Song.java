@@ -1,4 +1,4 @@
-package model;
+package model.media;
 
 // Represents a song having a title, artist genre, and runtime in seconds
 public class Song {
@@ -6,7 +6,6 @@ public class Song {
     private String artist;
     private String genre;
     private int runtime;
-    private String str;
 
     // EFFECTS: constructs a song item with a title, artist, genre, and runtime in seconds
     public Song(String title, String artist, String genre, int time) {
@@ -38,8 +37,7 @@ public class Song {
 
     // EFFECTS: returns description of song including title, artist, genre, and runtime
     public String toStringSong() {
-        str = getTitle() + " by " + getArtist() + ": " + getGenre();
-        return str;
+        return getTitle() + " by " + getArtist() + ": " + getGenre();
     }
 
 }

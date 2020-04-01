@@ -1,7 +1,6 @@
 package persistence;
 
-import model.Playlist;
-import org.junit.jupiter.api.BeforeEach;
+import model.media.Playlist;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;

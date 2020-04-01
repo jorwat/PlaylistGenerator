@@ -1,4 +1,4 @@
-package model;
+package model.media;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +80,7 @@ public class Playlist {
 
     // EFFECTS; returns a string of contents of the playlist
     public String toStringPlaylist() {
+        str = "";
         for (Song s : playlist) {
             str += "\n" + s.getTitle() + " by " + s.getArtist() + ": " + s.getGenre();
         }

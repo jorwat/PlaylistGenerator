@@ -54,4 +54,10 @@ saved library, just hit start and it will say hello.
  matchAndViewSongs. These were eventually handled down the line in the playlist app with messages to the user.
  
  ##Phase 4: Task 3
-  
+ - The first thing I fixed was creating specific scene classes for the non essential scenes. The PlaylistApp was running
+ each scene within the class which introduced limited cohesion. Breaking them up increases it and opens up the option of
+ easily adding in new scenes and swapping them out within the program.
+ - The final thing I did was move all of the key functions for manipulating the library within the scene classes. Before
+ they were also in the PlaylistApp which introduced alot of coupling between the PlaylistApp and the Library, Playlists,
+ and songs. Now, these individual functions are offloaded within the scenes itself, so the PlaylistApp isnt being
+ cluttered with these. Therefore, any functions for to manipulated the data are consolidated to the scene.

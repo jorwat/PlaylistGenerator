@@ -1,4 +1,4 @@
-package model;
+package model.media;
 
 import exceptions.NoPlaylistException;
 import persistence.Saveable;
@@ -54,6 +54,8 @@ public class Library implements Saveable {
 
     // EFFECTS; returns a string of contents of the playlist
     public String viewPlaylists() {
+        str = "";
+
         for (Playlist p : library) {
             str += "\n" + p.getPlaylistName() + ": a "
                     + p.getPlaylistGenre()

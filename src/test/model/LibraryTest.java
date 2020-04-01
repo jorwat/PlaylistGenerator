@@ -1,6 +1,9 @@
 package model;
 
 import exceptions.NoPlaylistException;
+import model.media.Library;
+import model.media.Playlist;
+import model.media.Song;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

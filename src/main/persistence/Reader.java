@@ -1,6 +1,6 @@
 package persistence;
 
-import model.Playlist;
+import model.media.Playlist;
 
 import java.io.File;
 import java.io.IOException;

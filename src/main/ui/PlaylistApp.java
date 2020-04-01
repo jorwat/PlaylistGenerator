@@ -1,6 +1,5 @@
 package ui;
 
-import exceptions.NoPlaylistException;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,16 +12,13 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import model.Library;
-import model.Playlist;
-import model.Song;
+import model.media.Library;
+import model.media.Playlist;
 import persistence.Reader;
-import persistence.Writer;
+import ui.scenes.WelcomeScreenSceneBox;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.util.List;
 
 // Playlist application
@@ -48,60 +44,7 @@ public class PlaylistApp extends Application {
             for (Playlist p : playlists) {
                 library.addPlaylist(p);
             }
-
         } catch (IOException e) {
-            throw new IOException();
-        }
-    }
-
-    // EFFECTS: saves state of library to PLAYLIST_FILE
-    private void saveLibrary() throws FileNotFoundException, UnsupportedEncodingException {
-        try {
-            String name = username;
-            library.setUsername(name);
-            Writer writer = new Writer(new File(PLAYLIST_FILE));
-            writer.write(library);
-            writer.close();
-            System.out.println("Library Saved to " + PLAYLIST_FILE + "!");
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to save library to file" + PLAYLIST_FILE);
-            throw new FileNotFoundException();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            throw new UnsupportedEncodingException();
-        }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: creates a playlist in the library
-    private void createPlaylist(String name, String genre) {
-        Playlist playlist = new Playlist(name, genre);
-        library.addPlaylist(playlist);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: asks the user for a song and adds it to the playlist
-    private void addSong(String name, String artist, String genre,
-                         String runtime, String playlist) throws NoPlaylistException {
-        Song song;
-        song = new Song(name, artist, genre, Integer.parseInt(runtime));
-
-        library.matchAndAdd(playlist, song);
-    }
-
-    // REQUIRES: user must close the program to see change reflected
-    // MODIFIES: this
-    // EFFECTS: deletes PLAYLIST_FILE
-    private void deleteLibrary(File file) throws IOException {
-        try {
-            Files.deleteIfExists(file.toPath());
-            System.out.println("Library deleted at " + PLAYLIST_FILE + "!"
-                    + " New Library will be made once application is" + "closed!");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            throw new UnsupportedOperationException();
-        } catch (IOException e) {
-            System.out.println("Unable to delete as file doesn't exist at" + PLAYLIST_FILE);
             throw new IOException();
         }
     }
@@ -130,11 +73,9 @@ public class PlaylistApp extends Application {
                 player.play();
             }
         });
-
         window.setScene(initial);
         window.setTitle("MyPersonalPlaylist");
         window.show();
-
     }
 
     // MODIFIES: this
@@ -147,7 +88,8 @@ public class PlaylistApp extends Application {
         try {
             loadLibrary();
             s.getChildren().addAll(b,player);
-            b.setOnAction(e -> window.setScene(welcomeScreenScene()));
+            b.setOnAction(e -> window.setScene(new Scene((new WelcomeScreenSceneBox(
+                    username,window,library)),WIDTH,HEIGHT)));
         } catch (IOException ex) {
             s.getChildren().addAll(b);
             b.setOnAction(e -> window.setScene(noLibraryScene()));
@@ -170,235 +112,10 @@ public class PlaylistApp extends Application {
         s.getChildren().addAll(title, field, b);
         b.setOnAction(e -> {
             username = field.getText();
-            window.setScene(welcomeScreenScene());
+            window.setScene(new Scene((new WelcomeScreenSceneBox(username,window,library)),WIDTH,HEIGHT));
         });
         library = new Library(username);
 
         return new Scene(s, 400, 400);
     }
-
-    // MODIFIES: this
-    // EFFECTS: returns a scene object once a library is loaded or instantiated
-    private Scene welcomeScreenScene() {
-        VBox s = new VBox();
-        Text message = new Text("Hello " + username);
-        Button b = new Button("Enter Library");
-
-        message.setTextAlignment(TextAlignment.CENTER);
-        message.setStyle("-fx-font: 28 arial;");
-        b.setPrefSize(100, 40);
-        s.setAlignment(Pos.CENTER);
-        s.getChildren().addAll(message, b);
-        b.setOnAction(e -> window.setScene(mainMenuScene()));
-
-        return new Scene(s, WIDTH, HEIGHT);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: returns a scene object of the main menu with buttons for options
-    private Scene mainMenuScene() {
-        SceneBox s = new SceneBox(username);
-        Button createPlaylist = new Button("Create Playlist");
-        Button addSong = new Button("Add a Song");
-        Button findPlaylistLength = new Button("Find Length of a Playlist");
-        Button viewSongs = new Button("View Contents of a Playlist");
-        Button saveLibrary = new Button("Save Contents of your Library");
-        Button viewLibrary = new Button("View Contents of Library");
-        Button deleteLibrary = new Button("Delete Library");
-        Button quit = new Button("Quit application");
-
-        s.getChildren().addAll(createPlaylist, addSong, findPlaylistLength, viewSongs,
-                saveLibrary, viewLibrary, deleteLibrary, quit);
-        createPlaylist.setOnAction(e -> window.setScene(createPlaylistScene()));
-        addSong.setOnAction(e -> window.setScene(addSongScene()));
-        findPlaylistLength.setOnAction(e -> window.setScene(playlistLengthScene()));
-        viewSongs.setOnAction(e -> window.setScene(viewSongsScene()));
-        saveLibrary.setOnAction(e -> window.setScene(saveLibraryScene()));
-        viewLibrary.setOnAction(e -> window.setScene(viewLibraryScene()));
-        deleteLibrary.setOnAction(e -> window.setScene(deleteLibraryScene()));
-        quit.setOnAction(e -> window.close());
-
-        return new Scene(s, WIDTH, HEIGHT);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: returns a scene object of a create playlist screen with actions
-    private Scene createPlaylistScene() {
-        SceneBox s = new SceneBox(username);
-        Text q1 = new Text("What would you like to call it?");
-        Text q2 = new Text("What kind of genre is it?");
-        TextField nameField = new TextField();
-        TextField genreField = new TextField();
-        Button submit = new Button("Submit");
-        Button menu = new Button("Return to Main Menu");
-
-        s.getChildren().addAll(q1, nameField, q2, genreField, submit, menu);
-
-        submit.setOnAction(e -> createPlaylist(nameField.getText(), genreField.getText()));
-        menu.setOnAction(e -> window.setScene(mainMenuScene()));
-
-        return new Scene(s, WIDTH, HEIGHT);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: returns a scene object of the add song scene with actions
-    private Scene addSongScene() {
-        SceneBox s = new SceneBox(username);
-        Text q1 = new Text("What is the song called?");
-        Text q2 = new Text("Who is the artist");
-        Text q3 = new Text("What genre is it?");
-        Text q4 = new Text("What is the runtime? (Only type in Integers)");
-        Text q5 = new Text("What playlist would you like to add it too?");
-        TextField nameField = new TextField();
-        TextField artistField = new TextField();
-        TextField genreField = new TextField();
-        TextField runtimeField = new TextField();
-        TextField playlistField = new TextField();
-        Button submit = new Button("Submit");
-        Button menu = new Button("Return to Main Menu");
-
-        s.getChildren().addAll(q1, nameField, q2, artistField, q3, genreField, q4, runtimeField,
-                q5, playlistField, submit, menu);
-        submit.setOnAction(e -> {
-            String str = addSongHelper(nameField.getText(), artistField.getText(), genreField.getText(),
-                    runtimeField.getText(), playlistField.getText());
-            Text message = new Text(str);
-            s.getChildren().add(message);
-        });
-
-        menu.setOnAction(e -> window.setScene(mainMenuScene()));
-
-        return new Scene(s, WIDTH, HEIGHT);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: returns a scene object which prompts the user for a playlist to find a runtime of.
-    private Scene playlistLengthScene() {
-        SceneBox s = new SceneBox(username);
-        TextField field = new TextField();
-        Text q1 = new Text("What playlist would you like to check?");
-        Button submit = new Button("Submit for runtime");
-        Button menu = new Button("Return to Main Menu");
-
-        s.getChildren().addAll(q1, field, submit, menu);
-        submit.setOnAction(e -> {
-            String playlist = field.getText();
-            Text runtime = new Text(matchAndFindRuntimeHelper(playlist));
-            s.getChildren().add(runtime);
-        });
-        menu.setOnAction(e -> window.setScene(mainMenuScene()));
-
-        return new Scene(s, WIDTH, HEIGHT);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: returns a scene object of the view songs scene with actions
-    private Scene viewSongsScene() {
-        SceneBox s = new SceneBox(username);
-        TextField field = new TextField();
-        Text q1 = new Text("What playlist would you like to check?");
-        Button submit = new Button("Submit for songs");
-        Button menu = new Button("Return to Main Menu");
-
-        s.getChildren().addAll(q1, field, submit, menu);
-        submit.setOnAction(e -> {
-            String playlist = field.getText();
-            Text songs = new Text(matchAndViewSongsHelper(playlist));
-            s.getChildren().add(songs);
-        });
-        menu.setOnAction(e -> window.setScene(mainMenuScene()));
-
-        return new Scene(s, WIDTH, HEIGHT);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: returns a scene object of the save library scene with actions
-    private Scene saveLibraryScene() {
-        SceneBox s = new SceneBox(username);
-        Button b = new Button("Return to Main Menu");
-
-        try {
-            saveLibrary();
-            Text message = new Text(username + "'s Library Saved to " + PLAYLIST_FILE + "!");
-            s.getChildren().addAll(message, b);
-            b.setOnAction(e -> window.setScene(mainMenuScene()));
-        } catch (FileNotFoundException | UnsupportedEncodingException ex) {
-            Text errorMessage = new Text("Unable to save library to file" + PLAYLIST_FILE);
-            s.getChildren().addAll(errorMessage, b);
-            b.setOnAction(e -> window.setScene(mainMenuScene()));
-        }
-
-        return new Scene(s, WIDTH, HEIGHT);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: returns a scene object of the view library scene
-    private Scene viewLibraryScene() {
-        SceneBox s = new SceneBox(username);
-        Text viewLibrary = new Text(library.viewPlaylists());
-        Button menu = new Button("Return to Main Menu");
-
-        s.getChildren().addAll(viewLibrary, menu);
-        menu.setOnAction(e -> window.setScene(mainMenuScene()));
-
-        return new Scene(s, WIDTH, HEIGHT);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: returns a scene object of the delete library scene
-    private Scene deleteLibraryScene() {
-        SceneBox s = new SceneBox(username);
-        Button b = new Button("Return to Main Menu");
-
-        try {
-            deleteLibrary(new File(PLAYLIST_FILE));
-            Text message = new Text("Library deleted at " + PLAYLIST_FILE + "!"
-                    + " New Library will be made once application is" + "closed!");
-            s.getChildren().addAll(message, b);
-            b.setOnAction(e -> window.setScene(mainMenuScene()));
-        } catch (IOException ex) {
-            Text message = new Text("Unable to delete the file at " + PLAYLIST_FILE);
-            s.getChildren().addAll(message, b);
-            b.setOnAction(e -> window.setScene(mainMenuScene()));
-        }
-        return new Scene(s, WIDTH, HEIGHT);
-    }
-
-    // EFFECTS: helper function for addSongScene that prints string and handles exception
-    private String addSongHelper(String name, String artist, String genre, String runtime, String playlist) {
-        String message;
-
-        try {
-            addSong(name, artist, genre, runtime, playlist);
-            message = "Song has been added!";
-        } catch (NoPlaylistException e) {
-            message = "Error. Please enter a valid playlist.";
-        }
-        return message;
-    }
-
-    // EFFECTS: helper function for matchAndFindRuntimeHelper to print text and Handle exception
-    private String matchAndFindRuntimeHelper(String name) {
-        String message;
-
-        try {
-            message = Integer.toString(library.matchAndFindRuntime(name));
-        } catch (NoPlaylistException e) {
-            message = "Please enter a playlist within the library";
-        }
-        return message;
-    }
-
-    // EFFECTS: helper function for matchAndViewSongs to print text and handle exception
-    private String matchAndViewSongsHelper(String name) {
-        String message;
-
-        try {
-            message = library.matchAndViewSongs(name);
-        } catch (NoPlaylistException e) {
-            message = "Please enter a playlist within the library";
-        }
-        return message;
-    }
-
 }
