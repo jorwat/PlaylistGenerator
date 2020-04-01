@@ -72,7 +72,7 @@ public class Library implements Saveable {
         for (Playlist p : library) {
             if (p.getPlaylistName().equals(playlist)) {
                 p.addSong(song);
-            } else if (!p.getPlaylistName().equals(playlist) || library == null) {
+            } else if (!p.getPlaylistName().equals(playlist)) {
                 throw new NoPlaylistException();
             }
         }
