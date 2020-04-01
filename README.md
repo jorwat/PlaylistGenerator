@@ -43,3 +43,15 @@ application is closed
 - You can delete a library as well in the same way. Changes will only be reflected after the application is closed
 - You can reload the state of the application by reopening the application. It happens automatically. If you have a 
 saved library, just hit start and it will say hello.
+
+##Phase 4: Task 2
+
+- Test and design a class that is robust.  You must have at least one method that throws a checked exception. 
+ You must have one test for the case where the exception is expected and another where the exception is not expected.
+ 
+ For this part of the phase, I refactored my library class to be more robust by handling when the exceptions when
+ a playlist does not exist in the library for a few functions. These methods are matchAndAdd, matchAndFindRuntime, and
+ matchAndViewSongs. These were eventually handled down the line in the playlist app with messages to the user.
+ 
+ ##Phase 4: Task 3
+  

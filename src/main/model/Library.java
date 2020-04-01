@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.NoPlaylistException;
 import persistence.Saveable;
 import persistence.Reader;
 
@@ -52,7 +53,7 @@ public class Library implements Saveable {
     }
 
     // EFFECTS; returns a string of contents of the playlist
-    public String viewPlaylists(String username) {
+    public String viewPlaylists() {
         for (Playlist p : library) {
             str += "\n" + p.getPlaylistName() + ": a "
                     + p.getPlaylistGenre()
@@ -62,37 +63,40 @@ public class Library implements Saveable {
         return str;
     }
 
-    // REQUIRES: playlist must exist within the library
     // MODIFIES: this, and playlist
     // EFFECTS: matches string to playlist and adds song to playlist
-    public void matchAndAdd(String playlist, Song song) {
+    public void matchAndAdd(String playlist, Song song) throws NoPlaylistException {
         for (Playlist p : library) {
             if (p.getPlaylistName().equals(playlist)) {
                 p.addSong(song);
+            } else if (!p.getPlaylistName().equals(playlist) || library == null) {
+                throw new NoPlaylistException();
             }
         }
     }
 
-    // REQUIRES: must have playlists in the library
     // EFFECTS: matches string with playlist name and returns total runtime
-    public int matchAndFindRuntime(String playlist) {
+    public int matchAndFindRuntime(String playlist) throws NoPlaylistException {
         int runtime = 0;
 
         for (Playlist p : library) {
             if (p.getPlaylistName().equals(playlist)) {
                 runtime = p.getTotalRuntime();
+            } else {
+                throw new NoPlaylistException();
             }
         }
         return runtime;
     }
 
-    // REQUIRES: playlist must exist within the library, playlist must have songs on it
     // EFFECTS: matches the name of the playlist with string,
     //          and displays songs in the playlist
-    public String matchAndViewSongs(String playlist) {
+    public String matchAndViewSongs(String playlist) throws NoPlaylistException {
         for (Playlist p : library) {
             if (p.getPlaylistName().equals(playlist)) {
                 str = p.toStringPlaylist();
+            } else {
+                throw new NoPlaylistException();
             }
         }
         return str;
@@ -107,7 +111,6 @@ public class Library implements Saveable {
     // EFFECTS: saves playlist data to save file
     @Override
     public void save(PrintWriter printWriter) {
-
         for (Playlist p : library) {
             p.changeTag(username);
             printWriter.print(p.getTag());
