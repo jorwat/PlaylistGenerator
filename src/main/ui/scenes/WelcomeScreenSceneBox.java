@@ -9,8 +9,6 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import model.media.Library;
 
-import javax.swing.*;
-
 // Welcome Screen scene where the user is greeted
 public class WelcomeScreenSceneBox extends VBox {
     public static final int WIDTH = 1280;

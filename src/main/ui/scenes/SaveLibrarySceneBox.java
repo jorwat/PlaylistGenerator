@@ -4,9 +4,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.SceneBox;
 import model.media.Library;
 import persistence.Writer;
+import ui.SceneBox;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -5,10 +5,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.SceneBox;
 import model.media.Library;
 import model.media.Playlist;
-import sun.awt.WindowIDProvider;
+import ui.SceneBox;
 
 // The CreatePlaylist Scene which prompts the user to create a playlist
 public class CreatePlaylistSceneBox extends SceneBox {

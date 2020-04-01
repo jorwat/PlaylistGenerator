@@ -92,5 +92,4 @@ public class Playlist {
     public void changeTag(String s) {
         tag = s;
     }
-
 }

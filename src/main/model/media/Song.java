@@ -30,7 +30,7 @@ public class Song {
         return genre;
     }
 
-    // EFFECTS: returns runtime of the song
+    // EFFECTS: returns runtime of the son
     public int getRuntime() {
         return runtime;
     }

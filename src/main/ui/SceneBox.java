@@ -1,4 +1,4 @@
-package model;
+package ui;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;

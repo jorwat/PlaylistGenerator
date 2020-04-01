@@ -60,4 +60,4 @@ saved library, just hit start and it will say hello.
  - The final thing I did was move all of the key functions for manipulating the library within the scene classes. Before
  they were also in the PlaylistApp which introduced alot of coupling between the PlaylistApp and the Library, Playlists,
  and songs. Now, these individual functions are offloaded within the scenes itself, so the PlaylistApp isnt being
- cluttered with these. Therefore, any functions for to manipulated the data are consolidated to the scene.
+ cluttered with these. Therefore, any functions for manipulating the data are consolidated to the specific scene.

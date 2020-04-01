@@ -3,8 +3,8 @@ package ui.scenes;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import model.SceneBox;
 import model.media.Library;
+import ui.SceneBox;
 
 public class MainMenuSceneBox extends SceneBox {
     public static final int WIDTH = 1280;

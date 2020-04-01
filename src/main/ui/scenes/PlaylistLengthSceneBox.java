@@ -6,8 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.SceneBox;
 import model.media.Library;
+import ui.SceneBox;
 
 // THe PlaylistLengthScene which prompts the user for a playlist to find a runtime of.
 public class PlaylistLengthSceneBox extends SceneBox {
