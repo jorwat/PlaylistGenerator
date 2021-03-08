@@ -12,37 +12,29 @@ understand how this functionality is built into my day to day applications.
 
 ## User Stories
 
-- As a user, I would like to create a custom playlist with a custom name
-- As a user, I would like to input a custom song with a name, artist and genre
-- As a user, I want to know how long my playlist is
-- As a user, I would like to view my playlists
+- As a user, I would like to create a custom playlist with a custom name.
+- As a user, I would like to input a custom song with a name, artist and genre.
+- As a user, I want to know how long my playlist is.
+- As a user, I would like to view my playlists.
 - As a user, I would like to create a custom library that saves on my machine; 
 that way all my playlists are saved, with song amounts and length.
 - As a user, I would like the application to open up to my library automatically without having
-to load it manually
-- As a user, I would like the option to delete my library and start over with a blank slate
+to load it manually.
+- As a user, I would like the option to delete my library and start over with a blank slate.
 
 ## Instructions for Grader
 
 - Before hitting Start, you will want to trigger the audio component, hit ctrl-m on the keyboard. 
-It should trigger a song. **It will pause at the main menu for now as I am planning to have a 
-random song player at the welcome screen**
-- From there, hit start and enter your name and hit the button
-- From there, enter your library
-- You can generate the first required event. *Create a playlist* by hitting the create a 
-playlist option and fill out the fields. Once done, hit submit. Then return to the main menu
-- You can generate a song in the same way as the playlists, but remember to enter the
- name of the same playlist you want to add to.
-- You can generate the second required event by *viewing the contents of a playlist*. 
-Hit the button in the main menu and enter the playlist you want to view. 
-The playlist with the amount of songs should show
-up.
+It should trigger a song. **It will pause at the main menu for now as I am planning to have a random song player at the welcome screen**
+- From there, hit start and enter your name and hit the button.
+- From there, enter your library.
+- You can generate the first required event. *Create a playlist* by hitting the create a playlist option and fill out the fields. Once done, hit submit. Then return to the main menu.
+- You can generate a song in the same way as the playlists, but remember to enter the name of the same playlist you want to add to.
+- You can generate the second required event by *viewing the contents of a playlist*. Hit the button in the main menu and enter the playlist you want to view. The playlist with the amount of songs should show up.
 - Other buttons have similar functionality. but are optional. 
-- You can save the state of the application by hitting the save library button. The file will write once the
-application is closed
-- You can delete a library as well in the same way. Changes will only be reflected after the application is closed
-- You can reload the state of the application by reopening the application. It happens automatically. If you have a 
-saved library, just hit start and it will say hello.
+- You can save the state of the application by hitting the save library button. The file will write once the application is closed.
+- You can delete a library as well in the same way. Changes will only be reflected after the application is closed.
+- You can reload the state of the application by reopening the application. It happens automatically. If you have a saved library, just hit start and it will say hello.
 
 ##Phase 4: Task 2
 
