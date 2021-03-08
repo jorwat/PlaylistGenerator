@@ -2,12 +2,11 @@
 
 ## What is this Project?
 
-This application will be a sort of interface for the user to input songs and put those songs into a playlist. A playlist
-is collection of songs that can either be a collection based on **genre, artist, or by user selection**. The application 
-should have a user interface that lets the user either input a song, view playlists, or sort songs by genre.
+This application will be a an interface for the user to input songs and combine those songs into playlists. A playlist
+is collection of songs that is categorized based on **genre, artist, or by user selection**. The application 
+should have a user interface that lets the user  input a song, view playlists, or sort songs by genre.
 Depending on how my experience increases through the term, I may increase the scope of the project, but
-initially I would like these basic functions. People who want a tailored collection of their music will use this
-application. This project is of interest to me as I listen to music all the time, so It would be interesting to
+initially I would like this basic functionality. This application is targetted as individuals seeking a tailored collection of their own music; all in a convenient and user friendly format. This project is of interest to me as I listen to music all the time, so i would be interesting to
 understand how this functionality is built into my day to day applications.
 
 ## User Stories
@@ -38,10 +37,10 @@ It should trigger a song. **It will pause at the main menu for now as I am plann
 
 ##Phase 4: Task 2
 
-- Test and design a class that is robust.  You must have at least one method that throws a checked exception. 
+ Test and design a class that is robust.  You must have at least one method that throws a checked exception. 
  You must have one test for the case where the exception is expected and another where the exception is not expected.
  
- For this part of the phase, I refactored my library class to be more robust by handling when the exceptions when
+ - For this part of the phase, I refactored my library class to be more robust by handling when the exceptions when
  a playlist does not exist in the library for a few functions. These methods are matchAndAdd, matchAndFindRuntime, and
  matchAndViewSongs. These were eventually handled down the line in the playlist app with messages to the user.
  
